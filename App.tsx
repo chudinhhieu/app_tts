@@ -1,118 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import * as React from 'react';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FavoriteScreen from './src/screens/favorite_screen';
+import SendOTPScreen from './src/screens/send_otp_screen';
+import RegisterScreen from './src/screens/register_screen';
+import LoginScreen from './src/screens/login_screen';
+import CartScreen from './src/screens/cart_screen';
+import PromotionScreen from './src/screens/promotion_screen';
+import OderScreen from './src/screens/oder_screen';
+import PaymentSuccessScreen from './src/screens/payment_success_screen';
+import MapSelectionScreen from './src/screens/chose_map_screen';
+import PieChartScreen from './src/screens/pie_chart_screen';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const Stack = createNativeStackNavigator();
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function RootStack() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <Stack.Navigator initialRouteName="pie">
+      <Stack.Screen name="favorite" component={FavoriteScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="sendOTP" component={SendOTPScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="register" component={RegisterScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="cart" component={CartScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="promotion" component={PromotionScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="oder" component={OderScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="payment_success" component={PaymentSuccessScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="maps" component={MapSelectionScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="pie" component={PieChartScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+export default function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
